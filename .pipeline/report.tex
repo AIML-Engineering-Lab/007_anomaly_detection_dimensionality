@@ -1,8 +1,8 @@
-%% AIML Engineering Lab - Project Report (v3)
+%% AIML Engineering Lab - Project Report (v5)
 %% Placeholders are replaced by generate_content.py
 \documentclass[11pt,a4paper]{article}
 
-\usepackage[a4paper, margin=2cm, top=2.2cm, bottom=2cm]{geometry}
+\usepackage[a4paper, margin=2cm, top=1.5cm, bottom=1.5cm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -21,16 +21,16 @@
 \usepackage{hyperref}
 \usepackage{float}
 \usepackage{caption}
-\usepackage{subcaption}
-\usepackage{tikz}
 \usepackage{tcolorbox}
 \usepackage{needspace}
 \tcbuselibrary{skins,breakable}
-\usetikzlibrary{arrows.meta, positioning}
 
 %% ── Colour palette ─────────────────────────────────────────────────────────
 \definecolor{primary}{HTML}{1A1A2E}
 \definecolor{accent}{HTML}{0F3460}
+\definecolor{titleblue}{HTML}{2E86C1}
+\definecolor{headingblue}{HTML}{2196F3}
+\definecolor{subheadblue}{HTML}{42A5F5}
 \definecolor{codemuted}{HTML}{6B7280}
 \definecolor{metricgreen}{HTML}{16A34A}
 \definecolor{tableheader}{HTML}{D0E8F7}
@@ -42,145 +42,107 @@
   linkcolor=accent,
   urlcolor=accent,
   citecolor=accent,
-  pdftitle={Anomaly Detection \& Dimensionality Reduction: t-SNE, UMAP, Isolation Forest},
+  pdftitle={Anomaly Detection \& Dimensionality Reduction},
   pdfauthor={AIML Engineering Lab},
 }
 
-\setstretch{1.18}
-\setlength{\parskip}{6pt}
+\setstretch{1.08}
+\setlength{\parskip}{3pt}
 \setlength{\parindent}{0pt}
 
 \titleformat{\section}
-  {\large\bfseries\color{accent}}
+  {\large\bfseries\color{headingblue}}
   {\thesection}{1em}{}[\color{tableheader}\titlerule]
 \titleformat{\subsection}
-  {\normalsize\bfseries\color{primary}}
+  {\normalsize\bfseries\color{subheadblue}}
   {\thesubsection}{0.8em}{}
-\titlespacing{\section}{0pt}{16pt}{6pt}
-\titlespacing{\subsection}{0pt}{10pt}{4pt}
+\titlespacing{\section}{0pt}{8pt}{3pt}
+\titlespacing{\subsection}{0pt}{6pt}{2pt}
 
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\color{codemuted}Project 007}
-\fancyhead[R]{\small\color{codemuted}Anomaly Detection \& Dimensionality Reduction: t-SNE, UMAP, Isolation Forest}
+\fancyhead[R]{\small\color{codemuted}Anomaly Detection \& Dimensionality Reduction}
 \fancyfoot[C]{\small\color{codemuted}\thepage}
 \renewcommand{\headrulewidth}{0.2pt}
 
 \newtcolorbox{resultbox}{
   colback=lightblue, colframe=tableheader,
-  boxrule=0.4pt, arc=4pt, left=10pt, right=10pt, top=6pt, bottom=6pt
+  boxrule=0.4pt, arc=4pt, left=10pt, right=10pt, top=3pt, bottom=3pt
 }
 
 \begin{document}
 
-%% ── COVER PAGE ─────────────────────────────────────────────────────────────
+%% ── PAGE 1: Title + Overview ───────────────────────────────────────────────
 \thispagestyle{empty}
 
-\begin{tikzpicture}[remember picture, overlay]
-  \fill[primary] (current page.north west)
-    rectangle ([yshift=-48pt]current page.north east);
-\end{tikzpicture}
-
-\vspace*{22pt}
-{\color{white}\large\bfseries AIML Engineering Lab}
-
-\vspace{50pt}
-
-\begin{flushright}
-  {\fontsize{9}{11}\selectfont\color{codemuted}PROJECT 007}
-\end{flushright}
-
-{\fontsize{26}{32}\selectfont\bfseries\color{primary} Anomaly Detection \& Dimensionality Reduction: t-SNE, UMAP, Isolation Forest}
+{\colorbox{primary}{\makebox[\dimexpr\linewidth-2\fboxsep][l]{\color{white}\bfseries\normalsize\hspace{6pt}AIML Engineering Lab}}}
 
 \vspace{6pt}
-{\large\color{accent} Detecting rare anomalies in sensor data through advanced dimensionality reduction techniques and anomaly detection algorithms.}
 
-\vspace{14pt}
-{\color{tableheader}\rule{\linewidth}{0.6pt}}
+{\fontsize{9}{11}\selectfont\color{codemuted}PROJECT 007}
 
-\vspace{16pt}
-This project tackles the challenge of identifying rare anomalies in two distinct datasets utilizing advanced machine learning techniques. By employing t-SNE and UMAP for dimensionality reduction alongside Isolation Forest for anomaly detection, we achieved significant insights into sensor readings. The results demonstrate effective isolation of anomalies, maintaining robust performance across the datasets.
+\vspace{1pt}
+{\fontsize{22}{27}\selectfont\bfseries\color{titleblue} Anomaly Detection \& Dimensionality Reduction}
 
-\vspace{12pt}
-\begin{resultbox}
-  \textbf{\color{accent}Key Result}\quad
-  {\large\bfseries\color{metricgreen}Area Under ROC Curve (AUC) = 0.93 for Isolation Forest on Jet Engine dataset}
-\end{resultbox}
+\vspace{2pt}
+{\normalsize\color{accent} Uncover hidden anomalies using cutting-edge ML techniques on real-world datasets.}
 
-\vfill
+\vspace{4pt}
+{\color{tableheader}\rule{\linewidth}{0.4pt}}
 
-\begin{tabularx}{\linewidth}{@{}>{\bfseries}l X @{}}
-  \arrayrulecolor{tableheader}
-  \toprule
-  \rowcolor{tableheader} Info & Detail \\
-  \midrule
-  \rowcolor{white} GitHub & \href{https://github.com/AIML-Engineering-Lab/007_anomaly_detection_dimensionality}{\nolinkurl{https://github.com/AIML-Engineering-Lab/007_anomaly_detection_dimensionality}} \\
-  \rowcolor{tablerow} Tech Stack & Python 3.11, scikit-learn, pandas, Matplotlib \\
-  \rowcolor{white} Licence & MIT \\
-  \bottomrule
-\end{tabularx}
+\vspace{3pt}
 
-\newpage
-
-%% ── 1. PROJECT OVERVIEW ────────────────────────────────────────────────────
 \section{Project Overview}
 
-Anomaly detection in high-dimensional datasets is critical in various domains where the identification of rare events can prevent system failures and improve safety standards. This project focuses on two real-world datasets: Jet Engine Sensors and Silicon Thermal Hotspots, which both present the challenge of detecting anomalies that make up only 3.2\% of the data. Such problems are challenging due to the imbalance between normal and anomalous instances and the high dimensionality of feature space. The approach taken involves utilizing advanced dimensionality reduction techniques—t-SNE and UMAP—coupled with Isolation Forest, a robust method for anomaly detection that works by isolating anomalies through random partitioning of the feature space. By preserving both local and global structures in data, these methods effectively facilitate the visualization and understanding of the anomalies present in the datasets. 
+I applied t-SNE, UMAP, and Isolation Forest for anomaly detection in two datasets. These methods effectively identified rare anomalies in jet engine and silicon thermal sensor data. Key results include successfully isolating anomalies and visualizing complex patterns.
 
-The project proceeds through a structured pipeline beginning with exploratory data analysis (EDA) to understand the data distribution followed by the training of an Isolation Forest model to generate anomaly scores. The performance of the dimensionality reduction techniques is compared against each other and against PCA, showcasing their effectiveness in preserving data topology while reducing dimensionality. Throughout the analysis, detailed evaluation metrics reveal how different algorithms perform, culminating in actionable insights that highlight the most effective methods for anomaly detection in these contexts.
+\textbf{t-SNE:} Reduces dimensions while preserving local relationships.
 
-\subsection{Key Concepts}
+\textbf{UMAP:} Offers faster dimensionality reduction while maintaining global structure.
 
-\textbf{t-SNE:} t-SNE is a non-linear dimensionality reduction technique that excels in preserving local neighborhood structures, making it ideal for visualizing high-dimensional data.
-
-\textbf{UMAP:} UMAP is a faster alternative to t-SNE that maintains global topology, enabling effective visualization and exploration of the data.
-
-\textbf{Isolation Forest:} Isolation Forest is an anomaly detection algorithm that isolates anomalies by constructing random partitions of the data, leading to effective identification of rare instances.
-
-\textbf{Contamination:} Contamination is a parameter in Isolation Forest that specifies the expected proportion of anomalies within the dataset, crucial for model training.
-
-\textbf{Anomaly Score:} Anomaly Score reflects the degree of isolation for an observation, with higher scores indicating a higher likelihood of being an outlier.
+\textbf{Isolation Forest:} Detects anomalies by randomly isolating outliers.
 
 
-%% ── 2. DATASETS ────────────────────────────────────────────────────────────
-\needspace{14\baselineskip}
+%% ── DATASETS ───────────────────────────────────────────────────────────────
+\needspace{8\baselineskip}
 \section{Datasets}
 
-\subsection{Jet Engine Sensor Anomaly Detection}
+\subsection{Jet Engine Sensors}
 
 \begin{tabularx}{\linewidth}{@{}>{\bfseries}l X @{}}
   \arrayrulecolor{tableheader}
   \toprule
   \rowcolor{tableheader} Property & Value \\
   \midrule
-  \rowcolor{white} Description & This dataset comprises sensor readings from jet engines, specifically taking measurements related to potential faults such as turbine overheating and oil pressure loss. With an anomaly rate of 3.2\% from 4,650 readings, it presents a challenge in identifying rare operational faults. \\
+  \rowcolor{white} Description & Data from jet engine sensor readings with rare anomalies. \\
   \rowcolor{tablerow} Total Rows & 4,650 \\
-  \rowcolor{white} Columns & 8 columns (7 features + 1 target) \\
-  \rowcolor{tablerow} Features & Sensor reading 1, Sensor reading 2, Sensor reading 3, Sensor reading 4, Sensor reading 5, Sensor reading 6, Sensor reading 7 \\
-  \rowcolor{white} Class Balance & Anomaly labels occur at a rate of approximately 3.2\% across the dataset. \\
-  \rowcolor{tablerow} Train / Test Split & 80\% train / 20\% test \\
+  \rowcolor{white} Columns & 8 \\
+  \rowcolor{tablerow} Features & Turbine temperature, Oil pressure, Fan speed, etc. \\
+  \rowcolor{white} Class Balance & 3.2\% anomalies \\
+  \rowcolor{tablerow} Train / Test Split & 80/20 \\
   \bottomrule
 \end{tabularx}
 
-\vspace{10pt}
+\vspace{6pt}
 
-\subsection{Silicon Thermal Hotspot Detection}
+\subsection{Silicon Thermal Hotspots}
 
 \begin{tabularx}{\linewidth}{@{}>{\bfseries}l X @{}}
   \arrayrulecolor{tableheader}
   \toprule
   \rowcolor{tableheader} Property & Value \\
   \midrule
-  \rowcolor{white} Description & This dataset originates from thermal and electrical measurements taken from silicon chips, looking to detect irregularities during the validation phase. With 9,300 readings and an anomaly rate of 3.2\%, it helps in identifying critical faults like thermal runaway and IR drop hotspots. \\
+  \rowcolor{white} Description & Thermal and electrical metrics from silicon chips. \\
   \rowcolor{tablerow} Total Rows & 9,300 \\
-  \rowcolor{white} Columns & 8 columns \\
-  \rowcolor{tablerow} Features & Temperature metric 1, Temperature metric 2, Voltage metric 1, Voltage metric 2, Leakage current, IR drop, Thermal measurements, Anomaly label \\
-  \rowcolor{white} Class Balance & Anomalies represent 3.2\% of cases in this dataset. \\
-  \rowcolor{tablerow} Train / Test Split & 80\% train / 20\% test \\
+  \rowcolor{white} Columns & 8 \\
+  \rowcolor{tablerow} Features & Thermal voltage, Leakage current, IR drop, etc. \\
+  \rowcolor{white} Class Balance & 3.2\% anomalies \\
+  \rowcolor{tablerow} Train / Test Split & 80/20 \\
   \bottomrule
 \end{tabularx}
 
-%% ── 3. METHODOLOGY ─────────────────────────────────────────────────────────
+%% ── METHODOLOGY ────────────────────────────────────────────────────────────
 \section{Methodology}
 
 \subsection{Algorithms Used}
@@ -190,45 +152,101 @@ The project proceeds through a structured pipeline beginning with exploratory da
   \toprule
   \rowcolor{tableheader} Algorithm & Description \\
   \midrule
-  \rowcolor{white} Isolation Forest & This algorithm is used for detecting anomalies by isolating outliers in the dataset, making it particularly suitable for datasets with rare anomalies. \\
-  \rowcolor{tablerow} t-SNE & t-SNE is employed for visualizing high-dimensional data by effectively preserving the local structure of the data points. \\
-  \rowcolor{white} UMAP & UMAP is utilized for dimensionality reduction, providing a balance between computational efficiency and retention of global structure. \\
-  \rowcolor{tablerow} PCA & Principal Component Analysis is included for comparison against the more advanced t-SNE and UMAP methods to highlight their performance in dimensionality reduction. \\
+  \rowcolor{white} t-SNE & Chosen for visualizing high-dimensional data. \\
+  \rowcolor{tablerow} UMAP & Selected for its speed and effectiveness in large datasets. \\
+  \rowcolor{white} Isolation Forest & Ideal for detecting anomalies in unlabeled data. \\
   \bottomrule
 \end{tabularx}
 
-\subsection{Processing Pipeline}
+I loaded the datasets, performed exploratory data analysis, applied Isolation Forest for anomaly detection, and used t-SNE and UMAP for effective visualization of results.
 
-The project starts with the setup phase where all required libraries and dependencies are installed, followed by loading the datasets into a Python environment using pandas. Exploratory Data Analysis (EDA) is conducted to visualize data distributions, detect missing values, and gain insights into the features correlated with anomalies. With the understanding gained from EDA, the next step involves implementing Isolation Forest to generate anomaly scores; this is where the Contamination parameter plays a key role, allowing the model to learn the expected anomaly distribution effectively. 
-
-Once the anomaly scores are obtained, dimensionality reduction techniques—PCA, t-SNE, and UMAP—are applied to visualize the high-dimensional feature space in lower dimensions. This helps in observing the location and distribution of the anomalies visually. Performance metrics such as ROC-AUC are calculated to evaluate how well the models perform in distinguishing between normal and anomaly classes. 
-
-Finally, a detailed analysis of the results is prepared, comparing the effectiveness of the different models and visualizations produced using each method, analyzing the distribution of anomaly scores and the resulting insights regarding the performance of each dimensionality reduction technique. This systematic approach ensures that each step is justified and contributes to the overarching goal of detecting anomalies in noisy data effectively.
-
-%% ── 4. RESULTS ─────────────────────────────────────────────────────────────
+%% ── RESULTS (images mixed in) ──────────────────────────────────────────────
 \section{Results}
 
-The performance of Isolation Forest proved to be notably robust, achieving an AUC of up to 0.93 on the Jet Engine dataset. The model successfully differentiated between normal operational conditions and rare anomalies, demonstrating its utility in fault detection scenarios. t-SNE and UMAP offered complementary visualizations that enriched the analysis, with t-SNE particularly effective in revealing the local clustering of anomalies, while UMAP provided clearer global context of the data structures. Overall, the models showed that combining unsupervised dimensionality reduction with anomaly detection is a potent strategy for high-dimensional datasets with rare events.
+Isolation Forest emerged as the strongest model for anomaly detection due to its efficiency with high-dimensional data. I found that t-SNE and UMAP provided insightful visualizations, clearly highlighting underlying patterns and anomalies.
 
-\vspace{6pt}
+\vspace{4pt}
 
 \begin{tabularx}{\linewidth}{@{}>{\bfseries}l X @{}}
   \arrayrulecolor{tableheader}
   \toprule
   \rowcolor{tableheader} Metric & Value \\
   \midrule
-  \rowcolor{white} ROC-AUC for Jet Engine & 0.93 \\
-  \rowcolor{tablerow} ROC-AUC for Silicon Thermal & 0.88 \\
+  \rowcolor{white} Isolation Forest Anomaly Score & Higher scores for isolated anomalies \\
   \bottomrule
 \end{tabularx}
 
-\vspace{8pt}
+\vspace{4pt}
 \begin{resultbox}
-  \textbf{\color{accent}Best Result}\quad {\bfseries\color{metricgreen}Area Under ROC Curve (AUC) = 0.93 for Isolation Forest on Jet Engine dataset}
+  \textbf{\color{accent}Best Result}\quad {\bfseries\color{metricgreen}Anomaly score distribution shows well-defined isolation.}
 \end{resultbox}
 
-%% ── 5. VISUALISATIONS ──────────────────────────────────────────────────────
-\section{Visualisations}
+\vspace{6pt}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/wow_3d_anomaly_jet.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/wow_3d_silicon_thermal.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/wow_pca_explained_variance.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/wow_model_heatmap.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/fig3_umap_vs_tsne.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/fig1_tsne_vs_pca.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/dim_reduction_silicon.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/fig4_silicon_hotspot.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/fig5_tsne_perplexity.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/dim_reduction_comparison.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/fig2_isolation_forest.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/eda_jet_engine.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/eda_silicon_thermal.png}
+\end{figure}
 
 \begin{figure}[H]
   \centering
@@ -240,33 +258,10 @@ The performance of Isolation Forest proved to be notably robust, achieving an AU
   \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/anomaly_scores_silicon.png}
 \end{figure}
 
-The initial two visualizations utilize t-SNE and UMAP to represent the jet engine sensor data in two dimensions. The t-SNE visualization reveals clusters indicating normal operation with scattered points representing anomalies. The UMAP visualization supports this by providing a layout of the data that highlights the relationships and separations between clusters, enhancing our understanding of anomaly distribution.
+Visualizations illustrate the distribution of anomalies and the effectiveness of dimensionality reduction techniques.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/dim_reduction_comparison.png}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/007_anomaly_detection_dimensionality/assets/dim_reduction_silicon.png}
-\end{figure}
-
-The next two visualizations provide a comparison between the PCA, t-SNE, and UMAP outputs of the silicon thermal dataset. PCA visualizes the data in the first two principal components, capturing global variance but at the expense of local structures, while the t-SNE and UMAP visualizations illustrate the underlying data topology and clustering of anomaly scores, thus facilitating easier interpretation of rare anomalies.
-
-%% ── 6. DEPLOYMENT ──────────────────────────────────────────────────────────
-\section{Deployment \& Tech Stack}
-
-The model can be deployed in an operational environment where real-time data from sensor readings can be analyzed for anomaly detection. This involves integrating the trained models with a data pipeline that can preprocess incoming data, apply the Isolation Forest model for scoring, and visualize results using t-SNE or UMAP for operational decision-making. This streamlines processes for timely identifying potential issues in aviation and semiconductor domains.
-
-\subsection{Quick Start}
-
-\begin{verbatim}
-git clone https://github.com/AIML-Engineering-Lab/007_anomaly_detection_dimensionality
-docker compose up --build
-\end{verbatim}
-
-\subsection{Tech Stack}
+%% ── TECH STACK & KEY LEARNINGS ──────────────────────────────────────────────
+\section{Tech Stack \& Key Learnings}
 
 \begin{tabularx}{\linewidth}{@{}>{\bfseries}l X @{}}
   \arrayrulecolor{tableheader}
@@ -279,21 +274,11 @@ docker compose up --build
   \bottomrule
 \end{tabularx}
 
-%% ── 7. KEY LEARNINGS ───────────────────────────────────────────────────────
-\section{Key Learnings}
-
-\begin{itemize}[leftmargin=18pt,itemsep=4pt]
-  \item Isolation Forest is highly effective for anomaly detection in datasets with a significant class imbalance, providing valuable insights without the need for labeled examples.
-  \item Dimensionality reduction methods like UMAP and t-SNE offer supplementary analytical capabilities, enhancing the interpretability of the data with visual aids.
-  \item The incorporation of different algorithms in detecting anomalies underscores the importance of model selection and the benefits of ensemble approaches in improving predictive performance.
-\end{itemize}
-
-%% ── 8. FUTURE WORK ─────────────────────────────────────────────────────────
-\section{Future Work}
-
-\begin{itemize}[leftmargin=18pt,itemsep=4pt]
-  \item Enhancing the Isolation Forest model through hyperparameter tuning to better adapt to data characteristics.
-  \item Exploration of alternative anomaly detection techniques, such as Autoencoders or One-Class SVM, for further improvements in sensitivity.
+\vspace{4pt}
+\begin{itemize}[leftmargin=18pt,itemsep=2pt]
+  \item Dimensionality reduction enhances anomaly detection.
+  \item Isolation Forest effectively identifies rare events.
+  \item Visualizations greatly aid in understanding complex data.
 \end{itemize}
 
 \end{document}

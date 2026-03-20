@@ -141,3 +141,28 @@ python tests/test_model.py
 # Explore notebooks
 jupyter notebook notebooks/
 ```
+
+---
+
+## Architecture
+
+```mermaid
+graph LR
+    A[CSV Data] --> B[StandardScaler]
+    B --> C[Isolation Forest]
+    B --> D[One-Class SVM]
+    B --> E[LOF]
+    C --> F[Anomaly Comparison]
+    D --> F
+    E --> F
+    B --> G[PCA / t-SNE / UMAP]
+    G --> H[DR Visualization]
+    F --> I[Best Model Export]
+    I --> J[FastAPI /predict]
+```
+
+---
+
+## License
+
+MIT
